@@ -5,6 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "dev": "vue-cli-service serve --mode dev --open",
+    "prd": "vue-cli-service serve --mode prd --open",
+    "build-dev": "vue-cli-service build --mode dev",
+    "build-prd": "vue-cli-service build --mode prd",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -12,6 +16,7 @@
     "core-js": "^3.8.3",
     "js-cookie": "^3.0.1",
     "vant": "^3.5.1",
+    "vconsole": "^3.14.6",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
