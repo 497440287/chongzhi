@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import middleware from './middleware'
+import '@/assets/css/base.css'
 import 'amfe-flexible'
 import VConsole from 'vconsole'
 
