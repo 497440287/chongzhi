@@ -20,7 +20,6 @@ export default (to, from, next) => {
   } else {
     return next()
   }
-  next()
 }
 
 function wxRedirectUrl (redirectUri) {
