@@ -3,7 +3,10 @@ const appid = process.env.VUE_APP_WX_APPID
 export default (to, from, next) => {
   if (to.meta.wxAuth) {
     if (store.getters.getToken) { // 判断是否已经存在登录信息
-      return next()
+      setTimeout(() => {
+        // 在这里调用checkToken校验token
+        return next()
+      }, 1000)
     } else if (to.query.code) { // 判断是否已经回调并非返回code
       setTimeout(() => {
         // 在这里调用查询用和信息接口,获取token
@@ -11,7 +14,7 @@ export default (to, from, next) => {
         store.dispatch('setThirdToken', 'fasdfadsfewrewqrqewrwqq')
         store.dispatch('setUserInfo', { name: '哈哈', role: 'admin', userId: '001' })
         return next()
-      }, 4000)
+      }, 1000)
     } else if (/MicroMessenger/i.test(window.navigator.userAgent)) { // 进入微信回调鉴权
       location.href = wxRedirectUrl(location.href)
     } else { // 判断是否是微信环境
