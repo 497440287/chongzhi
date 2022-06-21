@@ -39,15 +39,12 @@ module.exports = defineConfig({
         onEnd: {
           archive: [{
             source: './dist',
-            destination: './dist/h5-vue-template.tar.gz',
+            destination: './dist/vue3-mobile-template.tar.gz',
             format: 'tar',
             options: {
               gzip: true,
               gzipOptions: {
-                level: 1
-              },
-              globOptions: {
-                nomount: true
+                level: 9
               }
             }
           }]
