@@ -2,6 +2,7 @@ import store from '@/store'
 const appid = process.env.VUE_APP_WX_APPID
 export default (to, from, next) => {
   if (to.meta.wxAuth) {
+    console.log('输出当前路径：', location.href)
     if (store.getters.getToken) { // 判断是否已经存在登录信息
       setTimeout(() => {
         // 在这里调用checkToken校验token
