@@ -18,6 +18,7 @@ module.exports = {
   globals: {
     Zepto: true,
     $: true,
-    moment: true
+    moment: true,
+    wx: true
   }
 }
