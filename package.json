@@ -40,6 +40,9 @@
     "less-loader": "^8.0.0",
     "postcss": "^8.4.14",
     "postcss-pxtorem": "^6.0.0",
-    "unplugin-vue-components": "^0.19.6"
+    "unplugin-vue-components": "^0.19.6",
+    "terser-webpack-plugin": "^2.2.2",
+    "filemanager-webpack-plugin": "^2.0.5",
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
