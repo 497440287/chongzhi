@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const FileManagerPlugin = require('filemanager-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-console.log('当前运行环境', process.argv[2], process.argv[4])
+console.log('当前运行环境', process.argv[2], process.argv[4], process.env.NODE_ENV)
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
@@ -59,7 +59,7 @@ module.exports = defineConfig({
         }
       )
     ]
-    if (process.argv[2] === 'build') {
+    if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
       config.plugins = [...config.plugins, ...prdPlugins]
     }

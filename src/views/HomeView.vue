@@ -18,6 +18,9 @@ export default {
   components: {
     HelloWorld,
     [Button.name]: Button
+  },
+  mounted () {
+    console.log('输出vuex', this.$store.state)
   }
 }
 </script>

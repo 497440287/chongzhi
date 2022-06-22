@@ -7,7 +7,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: {
-      wxAuth: false
+      wxAuth: true
     }
   },
   {
