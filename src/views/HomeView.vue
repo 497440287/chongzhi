@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld :msg="msg"/>
-    <van-button type="primary" size="small" @click="handleClick">主要按钮</van-button>
+    <van-button type="primary" size="small" @click="handleClick">关闭页面</van-button>
   </div>
 </template>
 
@@ -20,6 +20,7 @@ export default {
   setup () {
     console.log('输出vuex', useStore().state)
     const handleClick = () => {
+      window.location.href = 'about:blank'
       window.close()
     }
     return {

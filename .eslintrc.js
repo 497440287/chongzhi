@@ -20,6 +20,7 @@ module.exports = {
     Zepto: true,
     $: true,
     moment: true,
-    wx: true
+    wx: true,
+    wxSignLink: true
   }
 }
