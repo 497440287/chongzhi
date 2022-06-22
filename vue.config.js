@@ -65,7 +65,7 @@ module.exports = defineConfig({
       // 为生产环境修改配置...
       config.plugins = [...config.plugins, ...developmentBuildPlugins, ...productionBuildPlugins]
     }
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' && process.argv[2] === 'dev') {
       // 为生产环境修改配置...
       config.plugins = [...config.plugins, ...developmentBuildPlugins]
     }
