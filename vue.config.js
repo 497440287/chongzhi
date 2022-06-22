@@ -15,30 +15,7 @@ module.exports = defineConfig({
     config.plugins.push(
       ComponentsPlugin({
         resolvers: [VantResolver()]
-      }),
-      new FileManagerPlugin({
-        onEnd: {
-          archive: [{
-            source: './dist',
-            destination: './dist/vue3-mobile-template.tar.gz',
-            format: 'tar',
-            options: {
-              gzip: true,
-              gzipOptions: {
-                level: 9
-              }
-            }
-          }]
-        }
-      }),
-      new BundleAnalyzerPlugin(// 打包检测
-        {
-          analyzerMode: 'static',
-          openAnalyzer: false,
-          generateStatsFile: false,
-          statsOptions: { source: false }
-        }
-      )
+      })
     )
     const prdPlugins = [
       // 删除console插件
@@ -57,6 +34,29 @@ module.exports = defineConfig({
             comments: true
           }
         }
+      }),
+      // 压缩打包后的文件
+      new FileManagerPlugin({
+        onEnd: {
+          archive: [{
+            source: './dist',
+            destination: './dist/vue3-mobile-template.tar.gz',
+            format: 'tar',
+            options: {
+              gzip: true,
+              gzipOptions: {
+                level: 9
+              }
+            }
+          }]
+        }
+      }),
+      // 打包后的文件体积检测
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false,
+        generateStatsFile: false,
+        statsOptions: { source: false }
       })
     ]
     if (process.env.NODE_ENV === 'production') {

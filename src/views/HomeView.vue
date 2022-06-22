@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld :msg="msg"/>
-    <van-button type="primary" size="small">主要按钮</van-button>
+    <van-button type="primary" size="small" @click="handleClick">主要按钮</van-button>
   </div>
 </template>
 
@@ -19,9 +19,12 @@ export default {
   },
   setup () {
     console.log('输出vuex', useStore().state)
-
+    const handleClick = () => {
+      window.close()
+    }
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      handleClick
     }
   }
 }
