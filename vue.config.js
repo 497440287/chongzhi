@@ -17,24 +17,7 @@ module.exports = defineConfig({
         resolvers: [VantResolver()]
       })
     )
-    const prdPlugins = [
-      // 删除console插件
-      new TerserPlugin({
-        parallel: true,
-        sourceMap: false,
-        terserOptions: {
-          warnings: true,
-          compress: {
-            // 打包时删除console以及debugger，测试环境如需使用console或者debugger请改为false（不要直接删除）
-            drop_console: true,
-            drop_debugger: true
-          },
-          output: {
-            // 去掉注释内容
-            comments: true
-          }
-        }
-      }),
+    const developmentBuildPlugins = [
       // 压缩打包后的文件
       new FileManagerPlugin({
         onEnd: {
@@ -59,9 +42,32 @@ module.exports = defineConfig({
         statsOptions: { source: false }
       })
     ]
+    const productionBuildPlugins = [
+      // 删除console插件
+      new TerserPlugin({
+        parallel: true,
+        sourceMap: false,
+        terserOptions: {
+          warnings: true,
+          compress: {
+            // 打包时删除console以及debugger，测试环境如需使用console或者debugger请改为false（不要直接删除）
+            drop_console: true,
+            drop_debugger: true
+          },
+          output: {
+            // 去掉注释内容
+            comments: true
+          }
+        }
+      })
+    ]
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
-      config.plugins = [...config.plugins, ...prdPlugins]
+      config.plugins = [...config.plugins, ...developmentBuildPlugins, ...productionBuildPlugins]
+    }
+    if (process.env.NODE_ENV === 'development') {
+      // 为生产环境修改配置...
+      config.plugins = [...config.plugins, ...developmentBuildPlugins]
     }
   }
 })
