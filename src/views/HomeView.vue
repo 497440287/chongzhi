@@ -1,11 +1,8 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld :msg="msg"/>
     <van-button type="primary" size="small">主要按钮</van-button>
-    <div class="demo">
-      demo
-    </div>
   </div>
 </template>
 
@@ -13,14 +10,19 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import { Button } from 'vant'
+import { useStore } from 'vuex'
 export default {
   name: 'HomeView',
   components: {
     HelloWorld,
     [Button.name]: Button
   },
-  mounted () {
-    console.log('输出vuex', this.$store.state)
+  setup () {
+    console.log('输出vuex', useStore().state)
+
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
   }
 }
 </script>
