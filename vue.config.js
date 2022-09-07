@@ -15,6 +15,15 @@ module.exports = defineConfig({
     config.plugins.push(
       ComponentsPlugin({
         resolvers: [VantResolver()]
+      }),
+      require('unplugin-auto-import/webpack')({
+        imports: [
+          'vue',
+          'vue-router'
+        ],
+        eslintrc: {
+          enabled: true
+        }
       })
     )
     const developmentBuildPlugins = [
