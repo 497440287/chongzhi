@@ -7,14 +7,14 @@
 ARG mode
 ENV mode=${mode} 
 
-FROM node:10
+FROM node:14 AS node
 COPY ./ /app
 WORKDIR /app
 RUN npm install && npm run build-${mode:-prd}
 
 FROM nginx
 RUN mkdir /app
-COPY --from=0 /app/dist /app
+COPY --from=node /app/dist /app
 COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN echo '${mode:-prd} environment published successfully !!'
