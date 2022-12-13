@@ -1,18 +1,17 @@
 import store from '@/store'
 const appid = process.env.VUE_APP_WX_APPID
-export default (to, from, next) => {
+export default (to, from) => {
   // 判断安卓还是ios环境,记录ios第一个路径值
   if (window.wxSignLink || /(Android)/i.test(navigator.userAgent)) {
     window.wxSignLink = location.href
   }
   // 在vue文件中直接使用wxSignLink获取签名授权地址
 
-  if (to.meta.wxAuth) {
-    console.log('输出当前路径：', location.href)
+  return new Promise((resolve) => {
     if (store.getters.getToken) { // 判断是否已经存在登录信息
       setTimeout(() => {
         // 在这里调用checkToken校验token
-        return next()
+        resolve()
       }, 1000)
     } else if (to.query.code) { // 判断是否已经回调并非返回code
       setTimeout(() => {
@@ -20,15 +19,13 @@ export default (to, from, next) => {
         store.dispatch('setToken', 'fasdfadsfewrewqrqewrwqq')
         store.dispatch('setThirdToken', 'fasdfadsfewrewqrqewrwqq')
         store.dispatch('setUserInfo', { name: '哈哈', role: 'admin', userId: '001' })
-        return next()
+        resolve()
       }, 1000)
     } else {
       // 进入微信回调鉴权
       location.href = wxRedirectUrl(location.href)
     }
-  } else {
-    return next()
-  }
+  })
 }
 
 function wxRedirectUrl (redirectUri) {
