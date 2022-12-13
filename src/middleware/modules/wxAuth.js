@@ -1,14 +1,11 @@
 import store from '@/store'
 const appid = process.env.VUE_APP_WX_APPID
 export default (to, from, next) => {
-  // ios分享链接问题解决
-  if (/MicroMessenger/i.test(window.navigator.userAgent)) {
-    // 判断安卓还是ios环境,记录ios第一个路径值
-    if (window.wxSignLink || /(Android)/i.test(navigator.userAgent)) {
-      window.wxSignLink = location.href
-    }
-    // 在vue文件中直接使用wxSignLink获取签名授权地址
+  // 判断安卓还是ios环境,记录ios第一个路径值
+  if (window.wxSignLink || /(Android)/i.test(navigator.userAgent)) {
+    window.wxSignLink = location.href
   }
+  // 在vue文件中直接使用wxSignLink获取签名授权地址
 
   if (to.meta.wxAuth) {
     console.log('输出当前路径：', location.href)
@@ -25,10 +22,9 @@ export default (to, from, next) => {
         store.dispatch('setUserInfo', { name: '哈哈', role: 'admin', userId: '001' })
         return next()
       }, 1000)
-    } else if (/MicroMessenger/i.test(window.navigator.userAgent)) { // 进入微信回调鉴权
+    } else {
+      // 进入微信回调鉴权
       location.href = wxRedirectUrl(location.href)
-    } else { // 判断是否是微信环境
-      return next()
     }
   } else {
     return next()
