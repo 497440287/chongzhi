@@ -2,9 +2,10 @@ import router from '@/router'
 import wxAuth from './modules/wxAuth'
 import loginAuth from './modules/loginAuth'
 import common from './modules/common'
-
+import { start, done } from '@/utils/loading.js'
 const middleware = () => {
   router.beforeEach(async (to, from, next) => {
+    start()
     // 判断是否是微信环境
     if (/MicroMessenger/i.test(window.navigator.userAgent) & to.meta.wxAuth) {
       await wxAuth(to, from)
@@ -17,6 +18,7 @@ const middleware = () => {
     await common(to, from)
     // 进入页面
     next()
+    done()
   })
 }
 
